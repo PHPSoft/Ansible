@@ -1,0 +1,32 @@
+#Active Directory Server
+
+[ad]
+10.6.10.10
+
+#Database server
+[db]
+10.6.10.11
+
+#Application IIS Server
+[app]
+10.6.10.12
+
+[ad:vars]
+ ansible_user=administrator@DTESTLAB.LOCAL
+ ansible_pass=vagrant
+ ansible_port=5986
+ ansible_connection=winrm
+ ansible_winrm_server_cert_validation=ignore
+
+
+# Group Multi with all servers
+[multi:children]
+ad
+db
+app
+
+
+# Variables applicable for all server
+[multi:vars]
+ansible_ssh_user=vagrant
+ansible_ssh_private_key=~/.vagrant.d/insecure_private_key
